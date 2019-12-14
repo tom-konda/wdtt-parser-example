@@ -1,0 +1,16 @@
+{
+  "extends": "../../../tsconfig.json",
+  "compilerOptions": {
+    "lib": [
+      "webworker" ,"es2018"
+    ],
+    "types": [
+      "@tom-konda/wdtt-parser"
+    ],
+    "rootDir": ".",
+    "target": "es2018",
+    "module": "es2015",
+    "outDir": "../../../temp/js/worker",
+    "moduleResolution": "node"
+  },
+}

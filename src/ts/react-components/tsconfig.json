@@ -1,0 +1,17 @@
+{
+  "extends": "../../../tsconfig.json",
+  "compilerOptions": {
+    "lib": [
+      "es2018", "dom"
+    ],
+    "types": [
+      "react", "react-dom", "@emotion/styled", "@tom-konda/wdtt-parser"
+    ],
+    "rootDir": ".",
+    "target": "es2018",
+    "module": "es2015",
+    "outDir": "../../../temp/js/react-component",
+    "moduleResolution": "node",
+    "jsx": "react"
+  }
+}

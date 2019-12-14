@@ -1,0 +1,38 @@
+{
+  "dependencies": {
+    "@tom-konda/wdtt-parser": "../../lib/wdtt-parser",
+    "dexie": "^2.0.4",
+    "reset-css": "^4.0.1"
+  },
+  "devDependencies": {
+    "@emotion/styled": "^10.0.22",
+    "@types/react": "^16.8.3",
+    "@types/react-dom": "16.8.1",
+    "npm-run-all": "^4.1.5",
+    "postcss-cli": "^6.1.1",
+    "postcss-easy-import": "^3.0.0",
+    "postcss-nested": "^4.1.1",
+    "postcss-sassy-mixins": "^2.1.0",
+    "pug-cli": "^1.0.0-alpha6",
+    "rollup": "^1.26.4",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "typescript": "^3.7.3"
+  },
+  "scripts": {
+    "build": "npm-run-all pug:build-* --parallel precss:build-* ts:build-* --serial rollup:build-*",
+    "pug:build-html": "pug -P -o ./dist ./src/pug",
+    "precss:build-common": "postcss ./src/precss/*.css --base ./src/precss/ --config ./configs/postcss-configs/postcss.config.js -d ./dist/css",
+    "ts:build-worker": "tsc -p ./src/ts/worker",
+    "ts:build-react-components": "tsc -p ./src/ts/react-components",
+    "rollup:build-worker": "rollup -c ./configs/rollup-configs/worker.rollup.config.js",
+    "rollup:build-react-component": "rollup -c ./configs/rollup-configs/rollup.config.js",
+    "watch-all": "npm-run-all --parallel pug:watch-* ts:watch-* rollup:watch-*",
+    "pug:watch-html": "pug -w -P -o ./dist ./src/pug",
+    "precss:watch-common": "postcss ./src/precss/*.css --base ./src/precss/ --config ./configs/postcss/postcss.config.js -d ./dist/css",
+    "ts:watch-worker": "tsc -w -p ./src/ts/worker",
+    "_ts:watch-renderer-react-components": "tsc -w -p ./src/ts/renderer-react-components",
+    "rollup:watch-main-proc": "rollup -w -c ./configs/rollup/main-proc.rollup.config.js",
+    "rollup:watch-worker": "rollup -w -c ./configs/rollup/webworker.rollup.config.js"
+  }
+}

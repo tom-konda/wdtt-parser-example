@@ -9,8 +9,9 @@
     ],
     "rootDir": ".",
     "target": "es2018",
-    "module": "es2015",
+    "module": "ESNext",
     "outDir": "../../../temp/js/worker",
+    "allowJs": true,
     "moduleResolution": "node"
   },
 }

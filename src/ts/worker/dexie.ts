@@ -1,7 +1,6 @@
 import Dexie from 'dexie';
 
 class WdttFileDatabase extends Dexie {
-          
   trains: Dexie.Table<TrainsColumns, number>;
 
   constructor() {

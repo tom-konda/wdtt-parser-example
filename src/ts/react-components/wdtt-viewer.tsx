@@ -1,14 +1,14 @@
 import * as React from "react";
-import { workerOutput, TrainsColumns } from "../declaration/wdtt-viewer";
 import { WdttMainTitle, WdttSubTitleSection } from "./wdtt-title";
 import { timeTableTable as getTimetable } from "./timetable";
 import { calcTableWidth } from "./lib/table-calc";
 import styled from "@emotion/styled";
+import { useContext, FC } from "react";
+import { WDTTContext } from "./contexts/app-contexts";
 
-const WdttViewerBase : React.FC<{className?:string, wdtt?: workerOutput, direction: string, day: string, qualifiedTrains: {
-  trains: TrainsColumns[];
-  hourTrainsCount: Map<number, number>;
-}}> = ({className, wdtt, direction, day, qualifiedTrains}) => {
+const WdttViewerBase : FC<{className?:string}> = ({className}) => {
+  const state = useContext(WDTTContext);
+  const {timetable: wdtt, direction, day, qualifiedTrains} = state;
   if (wdtt && qualifiedTrains.trains.length) {
     const {timetable} = wdtt;
     const {mainTitle, subtitles, color} = timetable.titles;

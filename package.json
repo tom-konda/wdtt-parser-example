@@ -1,26 +1,40 @@
 {
+  "license": "MIT",
   "dependencies": {
-    "@tom-konda/wdtt-parser": "../../lib/wdtt-parser",
-    "dexie": "^2.0.4",
-    "reset-css": "^4.0.1"
+    "@tom-konda/wdtt-parser": "^2.0.5",
+    "dexie": "^3.0.1",
+    "reset-css": "^5.0.1"
   },
   "devDependencies": {
-    "@emotion/styled": "^10.0.22",
-    "@types/react": "^16.8.3",
-    "@types/react-dom": "16.8.1",
+    "@emotion/styled": "^10.0.27",
+    "@types/react": "^16.9.43",
+    "@types/react-dom": "^16.9.8",
+    "@typescript-eslint/eslint-plugin": "^3.7.0",
+    "@typescript-eslint/parser": "^3.7.0",
+    "eslint": "^7.5.0",
     "npm-run-all": "^4.1.5",
-    "postcss-cli": "^6.1.1",
+    "postcss-cli": "^7.1.1",
     "postcss-easy-import": "^3.0.0",
-    "postcss-nested": "^4.1.1",
+    "postcss-nested": "^4.2.3",
     "postcss-sassy-mixins": "^2.1.0",
     "pug-cli": "^1.0.0-alpha6",
-    "rollup": "^1.26.4",
+    "rollup": "^2.22.1",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "typescript": "^3.7.3"
+    "rollup-plugin-url-resolve": "^0.1.1",
+    "shelljs": "^0.8.4",
+    "typescript": "^3.9.7"
+  },
+  "resolutions": {
+    "@types/react": "^16.9.43"
   },
   "scripts": {
+    "prebuild": "npm run clean",
     "build": "npm-run-all pug:build-* --parallel precss:build-* ts:build-* --serial rollup:build-*",
+    "postbuild": "npm-run-all clean:temp copy:*",
+    "clean": "npm-run-all clean:*", 
+    "clean:dist": "node -e \"require('shelljs').rm('-R', ['./dist']);\"", 
+    "clean:temp": "node -e \"require('shelljs').rm('-R', ['./temp']);\"",
     "pug:build-html": "pug -P -o ./dist ./src/pug",
     "precss:build-common": "postcss ./src/precss/*.css --base ./src/precss/ --config ./configs/postcss-configs/postcss.config.js -d ./dist/css",
     "ts:build-worker": "tsc -p ./src/ts/worker",
@@ -33,6 +47,9 @@
     "ts:watch-worker": "tsc -w -p ./src/ts/worker",
     "_ts:watch-renderer-react-components": "tsc -w -p ./src/ts/renderer-react-components",
     "rollup:watch-main-proc": "rollup -w -c ./configs/rollup/main-proc.rollup.config.js",
-    "rollup:watch-worker": "rollup -w -c ./configs/rollup/webworker.rollup.config.js"
+    "rollup:watch-worker": "rollup -w -c ./configs/rollup/webworker.rollup.config.js",
+    "copy:fixtures": "node -e \"require('shelljs').cp('-R', ['./fixtures'], './dist');\"",
+    "lint": "npm-run-all lint:*",
+    "lint:src": "eslint src/**/*.ts"
   }
 }

@@ -16,7 +16,7 @@ export const timeTableTable = (wdtt: workerOutput, direction: string, day: strin
 
   if (orientation === 0) {
     const firstColumnWidth = getPortraitTableFirstColumnWidth(header.hourFontStyle);
-    let PortraitTable: FC<{className?:string}> = ({className}) => {
+    const PortraitTable: FC<{className?:string}> = ({className}) => {
       return <TableWrapper className={className}>
         <PortraitTableHeader timetable={timetable} direction={direction} day={day} />
         <PortraitTableHoursColumn header={timetable.header} trainHours={trainHours} day={day} trainsPerHour={trainsPerHour} cellHeight={timetable.cell.height} />
@@ -37,11 +37,11 @@ export const timeTableTable = (wdtt: workerOutput, direction: string, day: strin
     `;
   }
   else {
-    let LandscapeTable: FC<{className?:string}> = ({className}) => {
+    const LandscapeTable: FC<{className?:string}> = ({className}) => {
       return <TableWrapper className={className}>
-      <LandscapeTableHeader className="timetable__header" timetable={timetable} trainHours={trainHours} direction={direction} day={day} />
-      <LandscapeTableBody className="timetable__body" timetable={timetable} remarks={remarks} destinations={destinations} trainServices={trainServices} trainHours={trainHours} direction={direction} trains={trains}/>
-    </TableWrapper>
+        <LandscapeTableHeader className="timetable__header" timetable={timetable} trainHours={trainHours} direction={direction} day={day} />
+        <LandscapeTableBody className="timetable__body" timetable={timetable} remarks={remarks} destinations={destinations} trainServices={trainServices} trainHours={trainHours} direction={direction} trains={trains}/>
+      </TableWrapper>
     }
     const tableWidth = calcTableWidth(timetable, trainHours);
     return styled(LandscapeTable)`

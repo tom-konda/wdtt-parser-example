@@ -2,7 +2,7 @@ import {wdttParse} from '@tom-konda/wdtt-parser';
 
 self.addEventListener(
   'message',
-  async (event: MessageEvent) => {
+  async(event: MessageEvent) => {
     const {file} = event.data as {file : File};
     try {
       const loadResult = await fileHandler(file);
@@ -27,7 +27,7 @@ const fileHandler = (file: File) => {
     reader.readAsText(file, 'shift_jis');
     return new Promise(
       (resolve, reject) => {
-  
+
         reader.addEventListener(
           'load',
           () => {
@@ -58,7 +58,7 @@ const fileHandler = (file: File) => {
 //   );
 // }
 
-const addColumnsToAllTrains = async (inboundTrains: trainData[], outboundTrains: trainData[]) => {
+const addColumnsToAllTrains = async(inboundTrains: trainData[], outboundTrains: trainData[]) => {
   const trains = await Promise.all(
     [
       addColumnsToDirectionTrains(0, outboundTrains),
@@ -78,7 +78,7 @@ const addColumnsToDirectionTrains = (direction: number, directionTrains: trainDa
       const departureMinute = directionTrain.departureTime.slice(-2);
       return {
         ...directionObject,
-        ...directionTrain, 
+        ...directionTrain,
         ...{directionTrainIndex},
         ...{departureHour, departureMinute}
       } as TrainsColumns

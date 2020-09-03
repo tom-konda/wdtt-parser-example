@@ -52,15 +52,14 @@ export const LandscapeTableCaption: FC<{header: Pick<timetable, 'header'>['heade
 
 export const LandscapeTableHourCells: FC<{header: Pick<timetable, 'header'>['header'], cellWidth: number, trainHours: Map<number, number>, day: string, trainsPerHour: number}> = ({header, cellWidth, day, trainHours, trainsPerHour}) => {
   let counter = 0;
-  let cells: JSX.Element[] = [];
+  const cells: JSX.Element[] = [];
   const colors = {
     background: header[`${day}Background` as keyof Pick<timetable, 'header'>['header']],
     color: header[`${day}Color` as keyof Pick<timetable, 'header'>['header']]
   }
-  for (let [hour, trainsCount] of trainHours) {
-    if (hour >= 24) {
-      hour -= 24;
-    }
+  for (const [hour, trainsCount] of trainHours) {
+    const actualHour = hour >= 24 ? hour - 24 : hour;
+
     const demandWidth = Math.ceil(trainsCount / trainsPerHour);
     const Cell = styled(TableHourCellWrapperBase)`
       font-family: ${header.hourFontStyle.fontFamily};
@@ -77,7 +76,7 @@ export const LandscapeTableHourCells: FC<{header: Pick<timetable, 'header'>['hea
       height: ${Math.floor(header.hourFontStyle.fontSize * 5 / 3)}px;
       text-align: center;
     `
-    cells.push(<Cell key={`hour-${hour}`} >{hour}</Cell>);
+    cells.push(<Cell key={`hour-${actualHour}`} >{actualHour}</Cell>);
     counter++;
   }
   return <Fragment>{cells}</Fragment>
@@ -133,15 +132,14 @@ export const PortraitTableHeader = styled(PortraitTableHeaderBase)`
 `
 
 const PortraitTableHoursColumnBase: FC<{className?: string, header: Pick<timetable, 'header'>['header'], trainHours: Map<number, number>, day: string, trainsPerHour: number, cellHeight: number}> = ({className, header, trainHours, day, trainsPerHour, cellHeight}) => {
-  let cells: JSX.Element[] = [];
+  const cells: JSX.Element[] = [];
   const colors = {
     background: header[`${day}Background` as keyof Pick<timetable, 'header'>['header']],
     color: header[`${day}Color` as keyof Pick<timetable, 'header'>['header']]
   }
-  for (let [hour, trainsCount] of trainHours) {
-    if (hour >= 24) {
-      hour -= 24;
-    }
+  for (const [hour, trainsCount] of trainHours) {
+    const actualHour = hour >= 24 ? hour - 24 : hour;
+
     const demandHeight = Math.ceil(trainsCount / trainsPerHour);
     const Cell = styled(TableHourCellWrapperBase)`
       font-family: ${header.hourFontStyle.fontFamily};
@@ -157,7 +155,7 @@ const PortraitTableHoursColumnBase: FC<{className?: string, header: Pick<timetab
       height: ${cellHeight * demandHeight}px;
       text-align: center;
     `
-    cells.push(<Cell key={`hour-${hour}`} >{hour}</Cell>);
+    cells.push(<Cell key={`hour-${actualHour}`} >{actualHour}</Cell>);
   }
   return <div className={className}>{cells}</div>
 }

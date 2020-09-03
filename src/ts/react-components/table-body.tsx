@@ -27,10 +27,10 @@ const TableBodyCellWrapperBase: FC<{className?: string}> = ({className, children
 
 const LandscapeTableBodyCells: FC<{cell: cell, destinations: destination[], trainServices: trainService[], trainHours: Map<number, number>, trainsPerHour: number, trains: TrainsColumns[]}> = ({cell, destinations, trainServices, trainHours, trainsPerHour, trains}) => {
   const {width, height} = cell;
-  let bodyCells: JSX.Element[] = [];
+  const bodyCells: JSX.Element[] = [];
   let lastTrainIndex = 0;
   const bodyCellHeight = height * trainsPerHour;
-  for (let [hour, trainsCount] of trainHours) {
+  for (const [hour, trainsCount] of trainHours) {
     const demandWidth = Math.ceil(trainsCount / trainsPerHour);
     const {hourTrains, nextLastTrainIndex} = getHourTrains(hour, trains, lastTrainIndex, cell, destinations, trainServices);
     const Cell = styled(TableBodyCellWrapperBase)`
@@ -68,10 +68,10 @@ export const PortraitTableBody = styled(PortraitTableBodyBase)`
 
 const PortraitTableBodyCells: FC<{cell: cell, destinations: destination[], trainServices: trainService[], trainHours: Map<number, number>, trainsPerHour: number, trains: TrainsColumns[]}> = ({cell, destinations, trainServices, trainHours, trainsPerHour, trains}) => {
   const {width, height} = cell;
-  let bodyCells: JSX.Element[] = [];
+  const bodyCells: JSX.Element[] = [];
   let lastTrainIndex = 0;
   const bodyCellWidth = width * trainsPerHour;
-  for (let [hour, trainsCount] of trainHours) {
+  for (const [hour, trainsCount] of trainHours) {
     const demandHeight = Math.ceil(trainsCount / trainsPerHour);
     const {hourTrains, nextLastTrainIndex} = getHourTrains(hour, trains, lastTrainIndex, cell, destinations, trainServices);
     const Cell = styled(TableBodyCellWrapperBase)`
@@ -94,7 +94,7 @@ const PortraitTableBodyCells: FC<{cell: cell, destinations: destination[], train
 
 const getHourTrains = (hour: number, trains: TrainsColumns[], lastTrainIndex: number, cell: cell, destinations: destination[], trainServices: trainService[]) => {
   let index = lastTrainIndex;
-  let hourTrains: JSX.Element[] = [];
+  const hourTrains: JSX.Element[] = [];
   const {time, destination: cellDestination, service} = cell;
   for (; index < trains.length && hour === trains[index].departureHour; index++) {
     const train = trains[index];

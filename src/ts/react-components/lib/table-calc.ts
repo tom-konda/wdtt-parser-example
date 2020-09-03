@@ -16,8 +16,8 @@ export const calcTableWidth = (timetable: timetable, hourTrains: Map<number, num
 
 export const getPortraitTableFirstColumnWidth = (hourFontStyle: fontStyle) => {
   const {isBold, isItalic, fontFamily, fontSize} = hourFontStyle
-  let canvas = document.createElement('canvas');
-  let context = canvas.getContext('2d') as CanvasRenderingContext2D;
+  const canvas = document.createElement('canvas');
+  const context = canvas.getContext('2d') as CanvasRenderingContext2D;
   const boldFormat = isBold ? 'bold' : '';
   const italicFormat = isItalic ? 'italic' : '';
   context.font = `${boldFormat} ${italicFormat} ${fontSize}px ${fontFamily}`;
@@ -41,7 +41,7 @@ export const calcGridRepeat = (size: number, repeatUnits: number[][]) => {
 
 export const getRepeatUnits = (trainHours: Map<number, number>, trainsPerHour: number) => {
   let prevHourSize = 0;
-  let repeatUnits = [];
+  const repeatUnits = [];
   for (const [, trainCount] of trainHours.entries()) {
     const demandSize = Math.ceil(trainCount / trainsPerHour);
     if (prevHourSize !== demandSize) {

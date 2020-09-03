@@ -1,6 +1,6 @@
 self.addEventListener(
   'message',
-  async (event: MessageEvent) => {
+  async(event: MessageEvent) => {
     const MIN_DEPARTURE_HOUR = 3;
     const trainData = event.data as trainData[];
     let minHour = 26;

@@ -17,7 +17,7 @@ export const WdttMainTitle = styled(WdttMainTitleBase)`
   width: ${props => props.width}px;
 `
 
-const TimetableSubTitleText : FC<{className: string, color: string, title: fontStyleMergedType<{texts: string[]}>, index: number}>=
+const TimetableSubTitleText : FC<{className: string, color: string, title: fontStyleMergedType<{texts: string[]}>, index: number}> =
 ({className, index, title}) => {
   return <h2 className={className}>{title.texts[index]}</h2>
 }
